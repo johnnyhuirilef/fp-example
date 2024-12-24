@@ -2,26 +2,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { Effect } from "effect";
 
-import { getDefaultPort } from "../shared";
-import type { FileReadError, ParseJsonError, ValidationError } from "./types";
-
-const makeValidationError = (message: string): ValidationError => ({
-  type: "ValidationError",
-  message,
-});
-
-const makeFileReadError = (error: unknown): FileReadError => ({
-  type: "FileReadError",
-  message:
-    error instanceof Error
-      ? error.message
-      : "Error reading file, unknown reason",
-});
-
-const makeParseJsonError = (error: unknown): ParseJsonError => ({
-  type: "JsonParseError",
-  message: error instanceof Error ? error.message : "Error parsing JSON",
-});
+import {
+  getDefaultPort,
+  makeFileReadError,
+  makeParseJsonError,
+  makeValidationError,
+} from "../shared";
 
 const readFileContent = (filePath: string) =>
   Effect.tryPromise({

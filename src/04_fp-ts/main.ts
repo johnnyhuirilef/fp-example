@@ -7,31 +7,13 @@ import { pipe } from "fp-ts/function";
 import * as O from "fp-ts/Option";
 import * as R from "fp-ts/Record";
 
-import { getDefaultPort } from "../shared";
-import type {
-  AppError,
-  FileReadError,
-  ParseJsonError,
-  ValidationError,
-} from "./types";
-
-const makeValidationError = (message: string): ValidationError => ({
-  type: "ValidationError",
-  message,
-});
-
-const makeFileReadError = (error: unknown): FileReadError => ({
-  type: "FileReadError",
-  message:
-    error instanceof Error
-      ? error.message
-      : "Error reading file, unknown reason",
-});
-
-const makeParseJsonError = (error: unknown): ParseJsonError => ({
-  type: "JsonParseError",
-  message: error instanceof Error ? error.message : "Error parsing JSON",
-});
+import {
+  getDefaultPort,
+  makeFileReadError,
+  makeParseJsonError,
+  makeValidationError,
+} from "../shared";
+import type { AppError } from "./../shared/types";
 
 const readFileContent = (filePath: string): TE.TaskEither<AppError, string> => {
   return TE.tryCatch(
@@ -58,9 +40,7 @@ const validateObject = (value: unknown) =>
     E.fromPredicate(isObject, () => makeValidationError("Not an object"))
   );
 
-const validatePortProperty = (
-  obj: Record<string, unknown>
-): E.Either<ValidationError, number> =>
+const validatePortProperty = (obj: Record<string, unknown>) =>
   pipe(
     obj,
     R.lookup("port"),
