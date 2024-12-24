@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { getDefaultPort } from "../utils/index.ts";
+import { getDefaultPort } from "../shared/index.ts";
 
 const readFileContent = async (filePath: string): Promise<string> => {
   return await fs.readFile(filePath, "utf-8");

@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getDefaultPort } from "../utils/index.ts";
+import { getDefaultPort } from "../shared/index.ts";
 
 const readFileContent = (filePath: string): string => {
   return fs.readFileSync(filePath, "utf-8");
