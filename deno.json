@@ -5,5 +5,8 @@
     "dev:fs-sync": "deno run --watch ./src/01_sync-fs/main.ts",
     "fs-async": "deno run ./src/02_async-fs/main.ts",
     "dev:fs-async": "deno run --watch ./src/02_async-fs/main.ts"
+  },
+  "imports": {
+    "rxjs": "npm:rxjs@^7.8.1"
   }
 }
