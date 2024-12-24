@@ -3,8 +3,8 @@ import path from "node:path";
 import { from, of } from "rxjs";
 import { map, filter, defaultIfEmpty, mergeMap } from "rxjs/operators";
 
-import { getDefaultPort } from "../shared/index.ts";
-import { Config } from "./types/index.ts";
+import { getDefaultPort } from "../shared";
+import type { Config } from "./types";
 
 const readFileContent = (filePath: string) => {
   return from(readFile(filePath, "utf-8"));
