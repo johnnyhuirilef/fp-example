@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "npm:@types/node@*": "22.5.4",
+    "npm:fp-ts@^2.16.9": "2.16.9",
     "npm:rxjs@^7.8.1": "7.8.1"
   },
   "npm": {
@@ -10,6 +11,9 @@
       "dependencies": [
         "undici-types"
       ]
+    },
+    "fp-ts@2.16.9": {
+      "integrity": "sha512-+I2+FnVB+tVaxcYyQkHUq7ZdKScaBlX53A41mxQtpIccsfyv8PzdzP7fzp2AY832T4aoK6UZ5WRX/ebGd8uZuQ=="
     },
     "rxjs@7.8.1": {
       "integrity": "sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==",
@@ -26,6 +30,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:fp-ts@^2.16.9",
       "npm:rxjs@^7.8.1"
     ]
   }
