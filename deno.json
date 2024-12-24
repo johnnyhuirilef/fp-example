@@ -2,6 +2,8 @@
   "tasks": {
     "main": "deno run --watch main.ts",
     "fs-sync": "deno run ./src/01_sync-fs/main.ts",
-    "dev:fs-sync": "deno run --watch ./src/01_sync-fs/main.ts"
+    "dev:fs-sync": "deno run --watch ./src/01_sync-fs/main.ts",
+    "fs-async": "deno run ./src/02_async-fs/main.ts",
+    "dev:fs-async": "deno run --watch ./src/02_async-fs/main.ts"
   }
 }
