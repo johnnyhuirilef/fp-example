@@ -4,6 +4,9 @@ import { Effect } from "effect";
 
 import {
   getDefaultPort,
+  isNumber,
+  isObject,
+  isValidPortRange,
   makeFileReadError,
   makeParseJsonError,
   makeValidationError,
@@ -20,11 +23,6 @@ const parseJson = (data: string) =>
     try: () => JSON.parse(data),
     catch: (error) => makeParseJsonError(error),
   });
-
-const isObject = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
-const isNumber = (value: unknown): value is number => typeof value === "number";
-const isValidPortRange = (port: number) => port > 0 && port < 65536;
 
 const validateObject = (value: unknown) =>
   Effect.filterOrFail(Effect.succeed(value), isObject, () =>

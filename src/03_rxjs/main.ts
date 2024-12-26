@@ -3,8 +3,13 @@ import path from "node:path";
 import { from, of } from "rxjs";
 import { map, filter, defaultIfEmpty, mergeMap } from "rxjs/operators";
 
-import { getDefaultPort } from "../shared";
-import type { Config } from "./types";
+import {
+  getDefaultPort,
+  hasPortProperty,
+  isNumber,
+  isObject,
+  isValidPortRange,
+} from "../shared";
 
 const readFileContent = (filePath: string) => {
   return from(readFile(filePath, "utf-8"));
@@ -14,18 +19,13 @@ const parseJson = (data: string): unknown => {
   return JSON.parse(data);
 };
 
-const isObject = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
-
-const hasPortProperty = (value: Record<string, unknown>): value is Config =>
-  "port" in value && typeof value.port === "number";
-
 const extractPort = (config: unknown) => {
   return of(config).pipe(
     filter(isObject),
     filter(hasPortProperty),
     map((config) => config.port),
-    filter((port) => port > 0 && port < 65536),
+    filter(isNumber),
+    filter(isValidPortRange),
     defaultIfEmpty(getDefaultPort())
   );
 };

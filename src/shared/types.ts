@@ -1,5 +1,5 @@
 export type Config = {
-  port: number;
+  port: unknown;
 };
 
 export type ValidationError = {

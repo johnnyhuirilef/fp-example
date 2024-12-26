@@ -1,6 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { getDefaultPort } from "../shared/index.ts";
+import {
+  getDefaultPort,
+  hasPortProperty,
+  isNumber,
+  isObject,
+  isValidPortRange,
+} from "../shared/index.ts";
 
 const readFileContent = async (filePath: string): Promise<string> => {
   return await fs.readFile(filePath, "utf-8");
@@ -15,15 +21,19 @@ const extractPort = (config: unknown) => {
     return null;
   }
 
-  if (typeof config !== "object") {
+  if (!isObject(config)) {
     return null;
   }
 
-  if (!("port" in config)) {
+  if (!hasPortProperty(config)) {
     return null;
   }
 
-  if (typeof config.port !== "number") {
+  if (!isNumber(config.port)) {
+    return null;
+  }
+
+  if (!isValidPortRange(config.port)) {
     return null;
   }
 
@@ -42,10 +52,6 @@ const getPortFromConfig = async () => {
   }
 
   const config = parseJson(content);
-  if (config === null) {
-    return getDefaultPort();
-  }
-
   const port = extractPort(config) ?? getDefaultPort();
   return port;
 };
