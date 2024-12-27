@@ -5,7 +5,12 @@
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "start:sync": "bun run ./src/01_sync-fs/main.ts",
+    "start:async": "bun run ./src/02_async-fs/main.ts",
+    "start:rxjs": "bun run ./src/03_rxjs/main.ts",
+    "start:fp-ts": "bun run ./src/04_fp-ts/main.ts",
+    "start:effect": "bun run ./src/05_effect/main.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -12,31 +12,33 @@ This application showcases various programming paradigms by implementing a simpl
 > [`src/01_sync-fs/main.ts`](src/01_sync-fs/main.ts)
 - Uses Node.js synchronous file system operations
 - Simple error handling with try/catch
-- Straightforward imperative approach
+- Run with: `bun run start:sync`
+
 
 ### 2. Async/Await
 > [`src/02_async-fs/main.ts`](src/02_async-fs/main.ts)
 - Uses Node.js promises-based file system operations
 - Modern async/await syntax
-- Promise-based error handling
+- Run with: `bun run start:async`
 
 ### 3. RxJS
 > [`src/03_rxjs/main.ts`](src/03_rxjs/main.ts)
 - Reactive programming approach using RxJS
 - Stream-based data processing
-- Functional operators for data transformation
+- Run with: `bun run start:rxjs`
+
 
 ### 4. fp-ts
 > [`src/04_fp-ts/main.ts`](src/04_fp-ts/main.ts)
 - Functional programming approach using fp-ts
 - Type-safe error handling with Either and TaskEither
-- Pure functional composition
+- Run with: `bun run start:fp-ts`
 
 ### 5. Effect
 > [`src/05_effect/main.ts`](src/05_effect/main.ts)
 - Modern functional effects system
 - Robust error handling
-- Type-safe computations
+- Run with: `bun run start:effect`
 
 ## 🚀 Getting Started
 
@@ -50,20 +52,60 @@ This application showcases various programming paradigms by implementing a simpl
 bun install
 ```
 
-### Running Examples
-Execute any implementation using:
+### Testing
+
+Each implementation has its own test suite that verifies:
+- Valid port reading
+- Invalid port handling
+- Missing file scenarios
+- Malformed JSON handling
+- Edge cases
+
+Run all tests:
 ```bash
-bun src/<implementation-folder>/main.ts
+bun run test
 ```
 
-Example:
+### Configuration Setup
+
+Use the Makefile to create different config scenarios:
+
 ```bash
-bun src/01_sync-fs/main.ts
+# Create valid config (port: 8080)
+make config-valid
+
+# Create invalid config (port: -1)
+make config-invalid
+
+# Create config without port
+make config-missing
+
+# Create malformed JSON
+make config-malformed
+
+# Create empty config
+make config-empty
+
+# Remove config file
+make clean
+
+# Test all configurations
+make test-all
+```
+
+### Running Examples
+Execute any implementation using the npm scripts:
+```bash
+bun run start:sync    # Run synchronous implementation
+bun run start:async   # Run async implementation
+bun run start:rxjs    # Run RxJS implementation
+bun run start:fp-ts   # Run fp-ts implementation
+bun run start:effect  # Run Effect implementation
 ```
 
 ## ⚙️ Configuration
 
-Create a `config.json` file with the following structure:
+The config.json structure:
 ```json
 {
     "port": 8080
